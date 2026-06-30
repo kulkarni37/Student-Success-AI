@@ -1,0 +1,722 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Analytics — Student Success AI</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet"/>
+  <style>
+    /* =============================================
+       ANALYTICS — embedded styles
+       Matches Student Success AI dashboard theme
+       ============================================= */
+
+    * , *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    :root {
+      --bg-base:        #0f172a;
+      --bg-card:        #1e293b;
+      --border:         rgba(255,255,255,0.08);
+      --border-hover:   rgba(99,102,241,0.4);
+
+      --primary:        #6366f1;
+      --primary-light:  #818cf8;
+      --purple:         #8b5cf6;
+      --purple-light:   #a78bfa;
+      --cyan:           #38bdf8;
+
+      --red:            #f87171;
+      --red-soft:       rgba(248,113,113,0.15);
+      --orange:         #fb923c;
+      --orange-soft:    rgba(251,146,60,0.15);
+      --green:          #34d399;
+      --green-soft:     rgba(52,211,153,0.15);
+
+      --text-primary:   #ffffff;
+      --text-secondary: #94a3b8;
+      --text-muted:     #475569;
+
+      --shadow-card:    0 20px 40px rgba(0,0,0,.25);
+      --radius-card:    20px;
+
+      --font-primary:   'Inter', sans-serif;
+      --font-display:   'Space Grotesk', sans-serif;
+
+      --transition:     all 0.22s cubic-bezier(0.4,0,0.2,1);
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: var(--font-primary);
+      background-color: var(--bg-base);
+      color: var(--text-primary);
+      min-height: 100vh;
+      position: relative;
+      overflow-x: hidden;
+    }
+
+    ::-webkit-scrollbar { width: 6px; height: 6px; }
+    ::-webkit-scrollbar-track { background: transparent; }
+    ::-webkit-scrollbar-thumb { background: rgba(99,102,241,0.3); border-radius: 10px; }
+    ::-webkit-scrollbar-thumb:hover { background: rgba(99,102,241,0.5); }
+
+    /* Ambient background glow, consistent with dashboard */
+    body::before, body::after {
+      content: '';
+      position: fixed;
+      border-radius: 50%;
+      filter: blur(110px);
+      pointer-events: none;
+      z-index: 0;
+    }
+    body::before {
+      width: 500px; height: 500px;
+      background: radial-gradient(circle, rgba(99,102,241,0.14) 0%, transparent 70%);
+      top: -120px; left: 60px;
+    }
+    body::after {
+      width: 420px; height: 420px;
+      background: radial-gradient(circle, rgba(139,92,246,0.12) 0%, transparent 70%);
+      bottom: -60px; right: 100px;
+    }
+
+    .page-wrap {
+      position: relative;
+      z-index: 1;
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 36px 28px 60px;
+      display: flex;
+      flex-direction: column;
+      gap: 22px;
+    }
+
+    /* =============================================
+       SHARED PANEL BASE
+       ============================================= */
+    .panel {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-card);
+      padding: 24px;
+      box-shadow: var(--shadow-card);
+      position: relative;
+      overflow: hidden;
+      transition: var(--transition);
+      animation: panelEntry 0.5s cubic-bezier(0.4,0,0.2,1) both;
+    }
+    .panel::before {
+      content: '';
+      position: absolute;
+      top: -60px; right: -60px;
+      width: 200px; height: 200px;
+      background: radial-gradient(circle, rgba(99,102,241,0.12), transparent 70%);
+      border-radius: 50%;
+      pointer-events: none;
+    }
+    .panel:hover {
+      border-color: var(--border-hover);
+      box-shadow: 0 26px 52px rgba(0,0,0,0.32), 0 0 24px rgba(99,102,241,0.1);
+    }
+    @keyframes panelEntry {
+      from { opacity: 0; transform: translateY(14px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    .panel-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      margin-bottom: 18px;
+      position: relative;
+      z-index: 1;
+      flex-wrap: wrap;
+    }
+
+    .panel-title {
+      font-family: var(--font-display);
+      font-size: 16px;
+      font-weight: 700;
+      color: var(--text-primary);
+      display: flex;
+      align-items: center;
+      gap: 9px;
+    }
+
+    .panel-badge {
+      font-size: 11px;
+      color: var(--text-muted);
+      background: rgba(255,255,255,0.04);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      padding: 4px 11px;
+      white-space: nowrap;
+    }
+
+    .empty-line {
+      font-size: 13.5px;
+      color: var(--text-muted);
+      text-align: center;
+      padding: 28px 16px;
+      position: relative;
+      z-index: 1;
+    }
+
+    /* =============================================
+       HEADER
+       ============================================= */
+    .analytics-header {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+
+    .analytics-title {
+      font-family: var(--font-display);
+      font-size: 30px;
+      font-weight: 700;
+      letter-spacing: -0.01em;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .analytics-subtitle {
+      font-size: 13.5px;
+      color: var(--text-secondary);
+      margin-top: 6px;
+    }
+
+    .back-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      color: var(--text-secondary);
+      font-size: 13px;
+      font-weight: 600;
+      text-decoration: none;
+      padding: 9px 16px 9px 12px;
+      border-radius: 10px;
+      border: 1px solid var(--border);
+      background: rgba(255,255,255,0.02);
+      transition: var(--transition);
+      flex-shrink: 0;
+    }
+    .back-link:hover {
+      color: var(--primary-light);
+      border-color: var(--border-hover);
+      background: rgba(99,102,241,0.08);
+      transform: translateX(-2px);
+    }
+
+    /* =============================================
+       SECTION 2 — OVERVIEW CARDS
+       ============================================= */
+    .overview-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 16px;
+    }
+
+    .overview-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 18px;
+      padding: 20px;
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      box-shadow: var(--shadow-card);
+      transition: var(--transition);
+      position: relative;
+      overflow: hidden;
+      animation: panelEntry 0.5s cubic-bezier(0.4,0,0.2,1) both;
+    }
+    .overview-card:nth-child(1) { animation-delay: 0.03s; }
+    .overview-card:nth-child(2) { animation-delay: 0.07s; }
+    .overview-card:nth-child(3) { animation-delay: 0.11s; }
+    .overview-card:nth-child(4) { animation-delay: 0.15s; }
+
+    .overview-card::before {
+      content: '';
+      position: absolute;
+      top: -40px; right: -40px;
+      width: 130px; height: 130px;
+      background: radial-gradient(circle, rgba(99,102,241,0.14), transparent 70%);
+      border-radius: 50%;
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+    .overview-card:hover {
+      transform: translateY(-5px);
+      border-color: var(--border-hover);
+      box-shadow: 0 24px 48px rgba(0,0,0,0.32), 0 0 26px rgba(99,102,241,0.14);
+    }
+    .overview-card:hover::before { opacity: 1; }
+
+    .overview-icon {
+      width: 44px; height: 44px;
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      font-size: 20px;
+    }
+    .icon-total      { background: rgba(99,102,241,0.15);  color: var(--primary-light); }
+    .icon-completed  { background: var(--green-soft);       color: var(--green); }
+    .icon-pending    { background: var(--orange-soft);      color: var(--orange); }
+    .icon-rate       { background: rgba(167,139,250,0.15);  color: var(--purple-light); }
+
+    .overview-body { min-width: 0; }
+    .overview-label {
+      font-size: 11px;
+      font-weight: 600;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      margin-bottom: 4px;
+    }
+    .overview-value {
+      font-family: var(--font-display);
+      font-size: 26px;
+      font-weight: 700;
+      color: var(--text-primary);
+      line-height: 1;
+    }
+
+    /* =============================================
+       SECTION 3 — COMPLETION PROGRESS
+       ============================================= */
+    .progress-track-label {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      font-size: 12.5px;
+      color: var(--text-secondary);
+      margin-bottom: 10px;
+      position: relative;
+      z-index: 1;
+    }
+    .progress-track-label strong { color: var(--text-primary); font-size: 16px; }
+
+    .progress-track {
+      width: 100%;
+      height: 14px;
+      background: rgba(255,255,255,0.06);
+      border-radius: 20px;
+      overflow: hidden;
+      position: relative;
+      z-index: 1;
+    }
+
+    .progress-track-fill {
+      height: 100%;
+      width: 0%;
+      border-radius: 20px;
+      background: linear-gradient(90deg, var(--primary), var(--purple-light), var(--cyan));
+      background-size: 200% 100%;
+      animation: progressFill 1.5s cubic-bezier(0.4,0,0.2,1) forwards, gradientShift 3s linear infinite;
+      box-shadow: 0 0 16px rgba(99,102,241,0.5);
+    }
+
+    @keyframes progressFill {
+      from { width: 0%; }
+      to   { width: var(--target-pct); }
+    }
+    @keyframes gradientShift {
+      0%   { background-position: 0% 50%; }
+      100% { background-position: 200% 50%; }
+    }
+
+    .progress-caption {
+      font-size: 12px;
+      color: var(--text-muted);
+      margin-top: 10px;
+      position: relative;
+      z-index: 1;
+    }
+
+    /* =============================================
+       SECTION 4 — PRIORITY DISTRIBUTION
+       ============================================= */
+    .priority-list {
+      display: flex;
+      flex-direction: column;
+      gap: 18px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .priority-row-label {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      font-size: 13px;
+      margin-bottom: 8px;
+    }
+
+    .priority-row-name {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-weight: 600;
+      color: var(--text-primary);
+    }
+
+    .priority-dot {
+      width: 9px; height: 9px;
+      border-radius: 50%;
+      flex-shrink: 0;
+    }
+    .dot-high   { background: var(--red); box-shadow: 0 0 8px var(--red); }
+    .dot-medium { background: var(--orange); box-shadow: 0 0 8px var(--orange); }
+    .dot-low    { background: var(--green); box-shadow: 0 0 8px var(--green); }
+
+    .priority-row-count {
+      font-size: 12.5px;
+      color: var(--text-muted);
+      font-weight: 600;
+    }
+
+    .priority-track {
+      width: 100%;
+      height: 10px;
+      background: rgba(255,255,255,0.06);
+      border-radius: 20px;
+      overflow: hidden;
+    }
+
+    .priority-fill {
+      height: 100%;
+      width: 0%;
+      border-radius: 20px;
+      animation: progressFill 1.3s cubic-bezier(0.4,0,0.2,1) forwards;
+    }
+    .fill-high   { background: linear-gradient(90deg, #f87171, #fca5a5); box-shadow: 0 0 10px rgba(248,113,113,0.4); }
+    .fill-medium { background: linear-gradient(90deg, #fb923c, #fdba74); box-shadow: 0 0 10px rgba(251,146,60,0.4); }
+    .fill-low    { background: linear-gradient(90deg, #34d399, #6ee7b7); box-shadow: 0 0 10px rgba(52,211,153,0.4); }
+
+    /* =============================================
+       SECTION 5 — UPCOMING DEADLINES
+       ============================================= */
+    .deadlines-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+      gap: 14px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .deadline-card {
+      background: rgba(255,255,255,0.02);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 16px;
+      transition: var(--transition);
+    }
+    .deadline-card:hover {
+      background: rgba(255,255,255,0.045);
+      border-color: var(--border-hover);
+      transform: translateY(-3px);
+    }
+
+    .deadline-title {
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--text-primary);
+      margin-bottom: 10px;
+      line-height: 1.4;
+    }
+
+    .deadline-meta-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    .deadline-date {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 12px;
+      color: var(--text-secondary);
+    }
+    .deadline-date svg { color: var(--text-muted); flex-shrink: 0; }
+
+    .badge {
+      font-size: 10.5px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      padding: 4px 11px;
+      border-radius: 20px;
+      white-space: nowrap;
+      border: 1px solid transparent;
+    }
+    .badge-high   { background: var(--red-soft);    color: var(--red);    border-color: rgba(248,113,113,0.25); }
+    .badge-medium { background: var(--orange-soft);  color: var(--orange); border-color: rgba(251,146,60,0.25); }
+    .badge-low    { background: var(--green-soft);   color: var(--green);  border-color: rgba(52,211,153,0.25); }
+
+    /* =============================================
+       SECTION 6 — AI PRODUCTIVITY SUMMARY
+       ============================================= */
+    .ai-panel {
+      border: 1px solid rgba(99,102,241,0.25);
+      background: linear-gradient(135deg, rgba(99,102,241,0.07), rgba(139,92,246,0.04));
+    }
+
+    .ai-panel-header {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 16px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .ai-orb {
+      width: 38px; height: 38px;
+      border-radius: 50%;
+      background: conic-gradient(from 0deg, #6366f1, #a78bfa, #38bdf8, #6366f1);
+      animation: orbSpin 4s linear infinite;
+      box-shadow: 0 0 22px rgba(99,102,241,0.5);
+      flex-shrink: 0;
+    }
+    @keyframes orbSpin { to { filter: hue-rotate(360deg); } }
+
+    .ai-panel-title {
+      font-family: var(--font-display);
+      font-size: 16px;
+      font-weight: 700;
+      color: var(--text-primary);
+    }
+    .ai-panel-sub {
+      font-size: 12px;
+      color: var(--text-muted);
+      margin-top: 1px;
+    }
+
+    .ai-message {
+      font-size: 14px;
+      line-height: 1.75;
+      color: var(--text-secondary);
+      position: relative;
+      z-index: 1;
+    }
+
+    /* =============================================
+       RESPONSIVE
+       ============================================= */
+    @media (max-width: 1024px) {
+      .overview-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+
+    @media (max-width: 768px) {
+      .page-wrap { padding: 24px 16px 50px; }
+      .analytics-header { flex-direction: column; align-items: stretch; }
+      .analytics-title { font-size: 24px; }
+      .deadlines-grid { grid-template-columns: 1fr; }
+    }
+
+    @media (max-width: 480px) {
+      .overview-grid { grid-template-columns: 1fr; }
+      .overview-card { padding: 16px; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="page-wrap">
+
+    <!-- ===================== HEADER ===================== -->
+    <div class="analytics-header">
+      <div>
+        <h1 class="analytics-title">📊 Analytics</h1>
+        <p class="analytics-subtitle">Track your academic productivity.</p>
+      </div>
+      <a href="{{ url_for('dashboard') }}" class="back-link">
+        <svg width="15" height="15" viewBox="0 0 15 15" fill="none">
+          <path d="M9.5 3L4.5 7.5l5 4.5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+        Back to Dashboard
+      </a>
+    </div>
+
+    <!-- ===================== SECTION 2: OVERVIEW CARDS ===================== -->
+    <div class="overview-grid">
+
+      <div class="overview-card">
+        <div class="overview-icon icon-total">
+          <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+            <rect x="3" y="3" width="14" height="14" rx="3.5" stroke="currentColor" stroke-width="1.7"/>
+            <path d="M6.5 10h7M6.5 7.5h4.5M6.5 12.5h5.5" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/>
+          </svg>
+        </div>
+        <div class="overview-body">
+          <div class="overview-label">Total Tasks</div>
+          <div class="overview-value">{{ total }}</div>
+        </div>
+      </div>
+
+      <div class="overview-card">
+        <div class="overview-icon icon-completed">
+          <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+            <circle cx="10" cy="10" r="7.2" stroke="currentColor" stroke-width="1.7"/>
+            <path d="M6.8 10l2.2 2.2 4-4.5" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </div>
+        <div class="overview-body">
+          <div class="overview-label">Completed</div>
+          <div class="overview-value">{{ completed }}</div>
+        </div>
+      </div>
+
+      <div class="overview-card">
+        <div class="overview-icon icon-pending">
+          <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+            <circle cx="10" cy="10" r="7.2" stroke="currentColor" stroke-width="1.7"/>
+            <path d="M10 6v4l2.8 1.8" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/>
+          </svg>
+        </div>
+        <div class="overview-body">
+          <div class="overview-label">Pending</div>
+          <div class="overview-value">{{ pending }}</div>
+        </div>
+      </div>
+
+      <div class="overview-card">
+        <div class="overview-icon icon-rate">
+          <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+            <path d="M3 16l4.5-7 3.5 4 5.5-9" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </div>
+        <div class="overview-body">
+          <div class="overview-label">Completion Rate</div>
+          <div class="overview-value">{{ completion_rate }}%</div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- ===================== SECTION 3: COMPLETION PROGRESS ===================== -->
+    <div class="panel">
+      <div class="panel-header">
+        <div class="panel-title">✅ Completion Progress</div>
+        <span class="panel-badge">{{ completed }} of {{ total }} tasks</span>
+      </div>
+
+      <div class="progress-track-label">
+        <span>Overall Completion</span>
+        <strong>{{ completion_rate }}%</strong>
+      </div>
+      <div class="progress-track">
+        <div class="progress-track-fill" style="--target-pct: {{ completion_rate }}%;"></div>
+      </div>
+      <p class="progress-caption">Keep going — consistency builds momentum.</p>
+    </div>
+
+    <!-- ===================== SECTION 4: PRIORITY DISTRIBUTION ===================== -->
+    <div class="panel">
+      <div class="panel-header">
+        <div class="panel-title">🎯 Priority Distribution</div>
+        <span class="panel-badge">By task priority</span>
+      </div>
+
+      <div class="priority-list">
+
+        <div class="priority-row">
+          <div class="priority-row-label">
+            <span class="priority-row-name"><span class="priority-dot dot-high"></span> High Priority</span>
+            <span class="priority-row-count">{{ high }} task(s)</span>
+          </div>
+          <div class="priority-track">
+            <div class="priority-fill fill-high" style="--target-pct: {{ (high / total * 100) if total > 0 else 0 }}%;"></div>
+          </div>
+        </div>
+
+        <div class="priority-row">
+          <div class="priority-row-label">
+            <span class="priority-row-name"><span class="priority-dot dot-medium"></span> Medium Priority</span>
+            <span class="priority-row-count">{{ medium }} task(s)</span>
+          </div>
+          <div class="priority-track">
+            <div class="priority-fill fill-medium" style="--target-pct: {{ (medium / total * 100) if total > 0 else 0 }}%;"></div>
+          </div>
+        </div>
+
+        <div class="priority-row">
+          <div class="priority-row-label">
+            <span class="priority-row-name"><span class="priority-dot dot-low"></span> Low Priority</span>
+            <span class="priority-row-count">{{ low }} task(s)</span>
+          </div>
+          <div class="priority-track">
+            <div class="priority-fill fill-low" style="--target-pct: {{ (low / total * 100) if total > 0 else 0 }}%;"></div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- ===================== SECTION 5: UPCOMING DEADLINES ===================== -->
+    <div class="panel">
+      <div class="panel-header">
+        <div class="panel-title">⏳ Upcoming Deadlines</div>
+        <span class="panel-badge">{{ upcoming|length }} task(s)</span>
+      </div>
+
+      <div class="deadlines-grid">
+        {% for task in upcoming %}
+        <div class="deadline-card">
+          <div class="deadline-title">{{ task.title }}</div>
+          <div class="deadline-meta-row">
+            <span class="deadline-date">
+              <svg width="13" height="13" viewBox="0 0 13 13" fill="none">
+                <rect x="2" y="2.5" width="9" height="8.5" rx="1.3" stroke="currentColor" stroke-width="1.3"/>
+                <path d="M2 5h9" stroke="currentColor" stroke-width="1.3"/>
+              </svg>
+              {{ task.deadline.strftime('%d %b %Y') }}
+            </span>
+            {% if task.priority == 'High' %}
+              <span class="badge badge-high">High</span>
+            {% elif task.priority == 'Medium' %}
+              <span class="badge badge-medium">Medium</span>
+            {% else %}
+              <span class="badge badge-low">Low</span>
+            {% endif %}
+          </div>
+        </div>
+        {% else %}
+        <div class="empty-line">No upcoming deadlines.</div>
+        {% endfor %}
+      </div>
+    </div>
+
+    <!-- ===================== SECTION 6: AI PRODUCTIVITY SUMMARY ===================== -->
+    <div class="panel ai-panel">
+      <div class="ai-panel-header">
+        <div class="ai-orb"></div>
+        <div>
+          <div class="ai-panel-title">AI Productivity Summary</div>
+          <div class="ai-panel-sub">Powered by Student Success AI</div>
+        </div>
+      </div>
+      <p class="ai-message">{{ ai_message }}</p>
+    </div>
+
+  </div>
+
+</body>
+</html>

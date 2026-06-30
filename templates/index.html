@@ -1,0 +1,629 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Student Success AI — From Panic to Plan</title>
+  <meta name="description" content="AI-powered productivity for ambitious students. Turn academic chaos into career success." />
+  <link rel="stylesheet" href="static/style.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+</head>
+<body>
+
+<!-- Ambient blobs -->
+<div class="ambient" aria-hidden="true">
+  <div class="blob blob-1"></div>
+  <div class="blob blob-2"></div>
+  <div class="blob blob-3"></div>
+</div>
+
+<!-- Cursor glow -->
+<div id="cursorGlow" style="
+  position:fixed; pointer-events:none; z-index:9999;
+  width:320px; height:320px; border-radius:50%;
+  background:radial-gradient(circle, rgba(108,99,255,0.07), transparent 70%);
+  transform:translate(-50%,-50%); transition:opacity 0.4s;
+  top:0; left:0;
+" aria-hidden="true"></div>
+
+<div class="wrapper">
+
+  <!-- ═══════ NAV ═══════ -->
+  <nav id="mainNav" role="navigation" aria-label="Main navigation">
+    <a href="#" class="nav-logo" aria-label="Student Success AI home">
+      <div class="nav-logo-icon" aria-hidden="true">S</div>
+      Student Success AI
+    </a>
+
+    <ul class="nav-links" role="list">
+      <li><a href="#features">Features</a></li>
+      <li><a href="#how">How It Works</a></li>
+      <li><a href="#dashboard">Dashboard</a></li>
+      <li><a href="#testimonials">Stories</a></li>
+      <li><a href="#faq">FAQ</a></li>
+    </ul>
+<div class="nav-actions">
+
+{% if current_user.is_authenticated %}
+
+    <a href="{{ url_for('dashboard') }}" class="btn-ghost">
+        Dashboard
+    </a>
+
+    <a href="{{ url_for('logout') }}" class="btn-primary">
+        Logout
+    </a>
+
+{% else %}
+
+    <a href="{{ url_for('login') }}" class="btn-ghost">
+        Log In
+    </a>
+
+    <a href="{{ url_for('register') }}" class="btn-primary">
+        Get Started →
+    </a>
+
+{% endif %}
+
+</div>
+    </div>
+
+    <button class="hamburger" id="hamburger" aria-label="Open menu" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+  </nav>
+
+  <!-- Mobile menu -->
+  <div class="mobile-menu" id="mobileMenu" role="navigation" aria-label="Mobile navigation">
+    <a href="#features">Features</a>
+    <a href="#how">How It Works</a>
+    <a href="#dashboard">Dashboard</a>
+    <a href="#testimonials">Stories</a>
+    <a href="#hero-cta">Get Started →</a>
+  </div>
+
+  <!-- ═══════ HERO ═══════ -->
+  <section class="hero" id="hero" aria-labelledby="hero-heading">
+    <div class="hero-grid-overlay" aria-hidden="true"></div>
+
+    <div class="hero-inner">
+      <!-- Left -->
+      <div>
+        <div class="hero-badge" aria-label="Now in beta">
+          <span class="badge-dot" aria-hidden="true"></span>
+          Now in Beta — <span id="typingTag" aria-live="polite">AI Planning</span>
+        </div>
+
+        <h1 class="hero-headline" id="hero-heading">
+          Turn Academic<br/>
+          Chaos Into<br/>
+          <span class="grad-text">Career Success.</span>
+        </h1>
+
+        <p class="hero-sub">
+          Student Success AI helps you organize assignments, prepare for exams, prioritize tasks,
+          track internships, and stay ahead using intelligent AI planning — all in one place.
+        </p>
+
+        <div class="hero-actions" id="hero-cta">
+        <a href="{{ url_for('dashboard') }}" class="btn-primary">
+    Start Planning Free
+    <span style="font-size:1rem;">→</span>
+</a>
+          <button class="btn-secondary" aria-label="Watch demo video">
+            <span class="play-icon" aria-hidden="true">▶</span>
+            Watch Demo
+          </button>
+        </div>
+
+        <div class="hero-proof" role="list" aria-label="Key features">
+          <div class="proof-item" role="listitem">
+            <span class="proof-check" aria-hidden="true">✓</span> AI Planning
+          </div>
+          <div class="proof-item" role="listitem">
+            <span class="proof-check" aria-hidden="true">✓</span> Smart Prioritization
+          </div>
+          <div class="proof-item" role="listitem">
+            <span class="proof-check" aria-hidden="true">✓</span> Deadline Prediction
+          </div>
+          <div class="proof-item" role="listitem">
+            <span class="proof-check" aria-hidden="true">✓</span> 24/7 AI Mentor
+          </div>
+        </div>
+      </div>
+
+      <!-- Right — Dashboard Mockup -->
+      <div class="hero-dashboard-wrap" id="dashboard" aria-label="Product dashboard preview">
+        <div class="dashboard-glow" aria-hidden="true"></div>
+
+        <!-- Floating notification -->
+        <div class="dash-notif" aria-live="polite">
+          <span class="notif-dot" aria-hidden="true"></span>
+          <span class="notif-text">✅ CN Assignment submitted!</span>
+        </div>
+
+        <!-- Main card -->
+        <div class="dashboard-card" role="region" aria-label="Academic risk dashboard">
+          <svg width="0" height="0" aria-hidden="true">
+            <defs>
+              <linearGradient id="riskGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+                <stop offset="0%" stop-color="#FF6B6B"/>
+                <stop offset="100%" stop-color="#FFA552"/>
+              </linearGradient>
+            </defs>
+          </svg>
+
+          <div class="dash-header">
+            <span class="dash-title">Academic Risk Monitor</span>
+            <div class="dash-status">
+              <span class="dash-status-dot" aria-hidden="true"></span>
+              Live
+            </div>
+          </div>
+
+          <!-- Risk ring -->
+          <div class="risk-row" role="region" aria-label="Current risk score: 78 percent, HIGH">
+            <div class="risk-ring-wrap">
+              <svg class="risk-ring-svg" viewBox="0 0 72 72" aria-hidden="true">
+                <circle class="risk-ring-track" cx="36" cy="36" r="30"/>
+                <circle class="risk-ring-fill" cx="36" cy="36" r="30"/>
+              </svg>
+              <div class="risk-center" aria-hidden="true">
+                <span class="risk-pct">78%</span>
+                <span class="risk-pct-label">RISK</span>
+              </div>
+            </div>
+            <div class="risk-meta">
+              <span class="risk-badge">HIGH RISK</span>
+              <div class="risk-label">Risk Score</div>
+              <div class="risk-score-val">78 / 100</div>
+            </div>
+          </div>
+
+          <!-- Stats chips -->
+          <div class="dash-stats" role="group" aria-label="Task statistics">
+            <div class="stat-chip">
+              <div class="stat-chip-val">24</div>
+              <div class="stat-chip-lbl">Total Tasks</div>
+            </div>
+            <div class="stat-chip">
+              <div class="stat-chip-val" style="color:var(--risk-orange)">8</div>
+              <div class="stat-chip-lbl">Pending</div>
+            </div>
+            <div class="stat-chip">
+              <div class="stat-chip-val" style="color:var(--emerald)">16</div>
+              <div class="stat-chip-lbl">Completed</div>
+            </div>
+          </div>
+
+          <!-- AI Recommendation -->
+          <div class="ai-rec" role="region" aria-label="AI recommendation">
+            <div class="ai-rec-label">
+              <span class="ai-icon">✦</span> AI Recommendation
+            </div>
+            <div class="ai-rec-text">
+              Focus on CN Assignment today. Probability of completing all deadlines:
+            </div>
+            <div class="ai-rec-prob">
+              <div class="prob-bar-bg" role="progressbar" aria-valuenow="84" aria-valuemin="0" aria-valuemax="100" aria-label="84% completion probability">
+                <div class="prob-bar-fill" data-width="84%"></div>
+              </div>
+              <span class="prob-val">84%</span>
+            </div>
+          </div>
+
+          <!-- Upcoming Deadlines -->
+          <div>
+            <div class="deadlines-title">Upcoming Deadlines</div>
+            <div class="deadline-item" role="listitem">
+              <span class="deadline-priority p-high" aria-label="High priority" aria-hidden="true"></span>
+              <div class="deadline-info">
+                <div class="deadline-name">CN Assignment</div>
+                <div class="deadline-date">Tomorrow · 11:59 PM</div>
+              </div>
+              <div class="deadline-prog-wrap" aria-hidden="true">
+                <div class="deadline-prog-bg">
+                  <div class="deadline-prog-fill" data-width="35%"></div>
+                </div>
+              </div>
+            </div>
+            <div class="deadline-item" role="listitem">
+              <span class="deadline-priority p-med" aria-label="Medium priority" aria-hidden="true"></span>
+              <div class="deadline-info">
+                <div class="deadline-name">OS Mini Project</div>
+                <div class="deadline-date">3 Days · 5:00 PM</div>
+              </div>
+              <div class="deadline-prog-wrap" aria-hidden="true">
+                <div class="deadline-prog-bg">
+                  <div class="deadline-prog-fill" data-width="58%"></div>
+                </div>
+              </div>
+            </div>
+            <div class="deadline-item" role="listitem">
+              <span class="deadline-priority p-low" aria-label="Low priority" aria-hidden="true"></span>
+              <div class="deadline-info">
+                <div class="deadline-name">DBMS Lab Viva</div>
+                <div class="deadline-date">5 Days · 10:00 AM</div>
+              </div>
+              <div class="deadline-prog-wrap" aria-hidden="true">
+                <div class="deadline-prog-bg">
+                  <div class="deadline-prog-fill" data-width="75%"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Bottom pill -->
+        <div class="dash-pill" aria-hidden="true">
+          <span style="font-size:0.75rem;">⚡</span>
+          <span class="pill-text">AI updated your plan · <span id="liveTicker">00:00:00</span></span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════ STATS ═══════ -->
+  <div class="stats-section" aria-label="Platform statistics">
+    <div class="stats-inner">
+      <div class="stat-card reveal">
+        <span class="stat-val" data-target="10000" data-suffix="+" aria-live="polite">0</span>
+        <span class="stat-lbl">Students Supported</span>
+      </div>
+      <div class="stat-card reveal">
+        <span class="stat-val" data-target="95" data-suffix="%" aria-live="polite">0</span>
+        <span class="stat-lbl">Deadline Success Rate</span>
+      </div>
+      <div class="stat-card reveal">
+        <span class="stat-val" data-target="87" data-suffix="%" aria-live="polite">0</span>
+        <span class="stat-lbl">Better Productivity</span>
+      </div>
+      <div class="stat-card reveal">
+        <span class="stat-val" aria-label="24/7">24/7</span>
+        <span class="stat-lbl">AI Assistant</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══════ FEATURES ═══════ -->
+  <section class="features-section" id="features" aria-labelledby="features-heading">
+    <div class="section-header centered">
+      <span class="section-tag">✦ Features</span>
+      <h2 class="section-headline" id="features-heading">
+        Everything you need to<br/><span class="grad-text">ace every semester.</span>
+      </h2>
+      <p class="section-sub">
+        Six intelligent modules working in harmony to eliminate academic stress and accelerate your career trajectory.
+      </p>
+    </div>
+
+    <div class="features-grid">
+
+      <div class="feat-card">
+        <div class="feat-icon fi-violet" aria-hidden="true">📋</div>
+        <div class="feat-name">Smart Assignment Manager</div>
+        <p class="feat-desc">
+          Auto-organizes every assignment by subject, deadline, and complexity. Syncs with your college portal and sends intelligent reminders before panic sets in.
+        </p>
+      </div>
+
+      <div class="feat-card">
+        <div class="feat-icon fi-ice" aria-hidden="true">🧠</div>
+        <div class="feat-name">AI Priority Engine</div>
+        <p class="feat-desc">
+          Dynamically reweights your task list every morning using deadline proximity, grading impact, and your personal productivity patterns.
+        </p>
+      </div>
+
+      <div class="feat-card">
+        <div class="feat-icon fi-lav" aria-hidden="true">🚨</div>
+        <div class="feat-name">Panic-to-Plan Engine</div>
+        <p class="feat-desc">
+          Detect academic overwhelm and instantly generate a personalized rescue study plan — breaking impossible workloads into achievable daily sprints.
+        </p>
+      </div>
+
+      <div class="feat-card">
+        <div class="feat-icon fi-red" aria-hidden="true">⏳</div>
+        <div class="feat-name">Deadline Simulator</div>
+        <p class="feat-desc">
+          Run "what-if" simulations to see how slipping one deadline cascades across your schedule. Catch problems before they become crises.
+        </p>
+      </div>
+
+      <div class="feat-card">
+        <div class="feat-icon fi-grn" aria-hidden="true">📈</div>
+        <div class="feat-name">Academic Risk Predictor</div>
+        <p class="feat-desc">
+          Real-time risk scoring across all subjects. Identifies your highest-risk zones 10 days in advance so you can course-correct before grades suffer.
+        </p>
+      </div>
+
+      <div class="feat-card">
+        <div class="feat-icon fi-ora" aria-hidden="true">🎯</div>
+        <div class="feat-name">Placement Readiness Tracker</div>
+        <p class="feat-desc">
+          Tracks your internship applications, skill gaps, and resume milestones. Aligns your academic schedule with campus recruitment timelines automatically.
+        </p>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ═══════ HOW IT WORKS ═══════ -->
+  <section class="how-section" id="how" aria-labelledby="how-heading">
+    <div class="section-header" style="max-width:900px; margin:0 auto;">
+      <span class="section-tag">✦ Process</span>
+      <h2 class="section-headline" id="how-heading">
+        From chaos to clarity<br/><span class="grad-text">in four steps.</span>
+      </h2>
+      <p class="section-sub">
+        Our AI doesn't just organize — it thinks ahead, simulates outcomes, and keeps you on track so you never lose sleep over deadlines again.
+      </p>
+    </div>
+
+    <div class="how-inner">
+      <div class="timeline" role="list">
+
+        <div class="timeline-step" role="listitem">
+          <div class="step-node sn-1" aria-hidden="true">01</div>
+          <div class="step-content">
+            <div class="step-eyebrow">Step One</div>
+            <div class="step-title">Add Your Assignments</div>
+            <p class="step-desc">
+              Import from your LMS, paste from WhatsApp groups, or enter manually. Student Success AI reads syllabi, notices hidden dependencies, and builds your complete academic picture in seconds.
+            </p>
+          </div>
+        </div>
+
+        <div class="timeline-step" role="listitem">
+          <div class="step-node sn-2" aria-hidden="true">02</div>
+          <div class="step-content">
+            <div class="step-eyebrow">Step Two</div>
+            <div class="step-title">AI Analyzes Your Workload</div>
+            <p class="step-desc">
+              The AI engine scores every task by deadline urgency, effort estimate, and grade weight. It maps your cognitive load curve across the week and flags collision points before you see them.
+            </p>
+          </div>
+        </div>
+
+        <div class="timeline-step" role="listitem">
+          <div class="step-node sn-3" aria-hidden="true">03</div>
+          <div class="step-content">
+            <div class="step-eyebrow">Step Three</div>
+            <div class="step-title">Generates Your Rescue Plan</div>
+            <p class="step-desc">
+              A personalized daily schedule arrives — with study blocks, break intervals, and buffer zones built in. If a new assignment drops, the plan auto-regenerates in real time.
+            </p>
+          </div>
+        </div>
+
+        <div class="timeline-step" role="listitem">
+          <div class="step-node sn-4" aria-hidden="true">04</div>
+          <div class="step-content">
+            <div class="step-eyebrow">Step Four</div>
+            <div class="step-title">Stay Ahead of Every Deadline</div>
+            <p class="step-desc">
+              Get intelligent nudges, risk alerts, and weekly performance reports. Your 24/7 AI Mentor answers subject questions, reviews your writing, and keeps you motivated when energy dips.
+            </p>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════ TESTIMONIALS ═══════ -->
+  <section class="testi-section" id="testimonials" aria-labelledby="testi-heading">
+    <div class="section-header centered">
+      <span class="section-tag">✦ Student Stories</span>
+      <h2 class="section-headline" id="testi-heading">
+        Students who went from<br/><span class="grad-text">panic to first rank.</span>
+      </h2>
+      <p class="section-sub">
+        Real students. Real results. No generic stock photos.
+      </p>
+    </div>
+
+    <div class="testi-grid">
+
+      <div class="testi-card reveal">
+        <span class="testi-quote-icon" aria-hidden="true">"</span>
+        <div class="testi-stars" aria-label="5 stars">
+          <span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span>
+        </div>
+        <p class="testi-text">
+          I was juggling 7 assignments, internship prep, and two exams in the same week. Student Success AI built me a rescue plan in 20 seconds. I submitted everything on time and got a PPO from the internship.
+        </p>
+        <div class="testi-author">
+          <div class="testi-avatar av-1" aria-hidden="true">P</div>
+          <div>
+            <div class="testi-name">Priya Sharma</div>
+            <div class="testi-role">Final Year, Computer Engineering · Pune</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="testi-card reveal" style="transition-delay:0.12s">
+        <span class="testi-quote-icon" aria-hidden="true">"</span>
+        <div class="testi-stars" aria-label="5 stars">
+          <span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span>
+        </div>
+        <p class="testi-text">
+          The Academic Risk Predictor flagged my DBMS paper was at risk 12 days before the exam. I hadn't even noticed how behind I was. Ended up scoring 91. This is not a planner — it's a safety net.
+        </p>
+        <div class="testi-author">
+          <div class="testi-avatar av-2" aria-hidden="true">A</div>
+          <div>
+            <div class="testi-name">Arjun Mehta</div>
+            <div class="testi-role">Third Year, IT · Mumbai</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="testi-card reveal" style="transition-delay:0.24s">
+        <span class="testi-quote-icon" aria-hidden="true">"</span>
+        <div class="testi-stars" aria-label="5 stars">
+          <span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span>
+        </div>
+        <p class="testi-text">
+          As a student with a part-time job, my schedule is chaos. The AI Priority Engine restructures my plan every morning around my shifts. My GPA went from 6.8 to 8.4 in one semester. I'm not kidding.
+        </p>
+        <div class="testi-author">
+          <div class="testi-avatar av-3" aria-hidden="true">S</div>
+          <div>
+            <div class="testi-name">Sneha Kulkarni</div>
+            <div class="testi-role">Second Year, Data Science · Bangalore</div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ═══════ FAQ ═══════ -->
+  <section id="faq" style="background:var(--void);" aria-labelledby="faq-heading">
+    <div class="section-header centered">
+      <span class="section-tag">✦ FAQ</span>
+      <h2 class="section-headline" id="faq-heading">
+        Frequently asked<br/><span class="grad-text">questions.</span>
+      </h2>
+    </div>
+
+    <div style="max-width:720px; margin:0 auto; display:flex; flex-direction:column; gap:14px;" role="list">
+
+      <details class="faq-item" role="listitem" style="background:var(--glass-bg); border:1px solid var(--glass-border); border-radius:14px; padding:22px 24px; cursor:pointer; transition:border-color 0.3s;">
+        <summary style="font-family:var(--font-display); font-weight:600; color:var(--white); font-size:0.95rem; list-style:none; display:flex; justify-content:space-between; align-items:center; gap:12px;">
+          Is Student Success AI free to use?
+          <span style="color:var(--violet); font-size:1.2rem; flex-shrink:0;">+</span>
+        </summary>
+        <p style="margin-top:14px; font-size:0.875rem; color:var(--white-60); line-height:1.7;">
+          Yes — you can start planning for free with up to 10 assignments and full AI recommendations. Pro plans unlock unlimited tasks, the Deadline Simulator, Placement Tracker, and priority AI access.
+        </p>
+      </details>
+
+      <details class="faq-item" role="listitem" style="background:var(--glass-bg); border:1px solid var(--glass-border); border-radius:14px; padding:22px 24px; cursor:pointer; transition:border-color 0.3s;">
+        <summary style="font-family:var(--font-display); font-weight:600; color:var(--white); font-size:0.95rem; list-style:none; display:flex; justify-content:space-between; align-items:center; gap:12px;">
+          Does it work for engineering students in India?
+          <span style="color:var(--violet); font-size:1.2rem; flex-shrink:0;">+</span>
+        </summary>
+        <p style="margin-top:14px; font-size:0.875rem; color:var(--white-60); line-height:1.7;">
+          Absolutely. Student Success AI was built with Indian engineering curricula in mind — including semester exams, mid-terms, lab submissions, mini projects, and campus placements. It understands your academic calendar.
+        </p>
+      </details>
+
+      <details class="faq-item" role="listitem" style="background:var(--glass-bg); border:1px solid var(--glass-border); border-radius:14px; padding:22px 24px; cursor:pointer; transition:border-color 0.3s;">
+        <summary style="font-family:var(--font-display); font-weight:600; color:var(--white); font-size:0.95rem; list-style:none; display:flex; justify-content:space-between; align-items:center; gap:12px;">
+          How does the AI know how long each task will take?
+          <span style="color:var(--violet); font-size:1.2rem; flex-shrink:0;">+</span>
+        </summary>
+        <p style="margin-top:14px; font-size:0.875rem; color:var(--white-60); line-height:1.7;">
+          It learns from your historical completion patterns, difficulty ratings you assign, and aggregate data across the student community. Over two weeks it personalizes estimates to within 15% accuracy.
+        </p>
+      </details>
+
+      <details class="faq-item" role="listitem" style="background:var(--glass-bg); border:1px solid var(--glass-border); border-radius:14px; padding:22px 24px; cursor:pointer; transition:border-color 0.3s;">
+        <summary style="font-family:var(--font-display); font-weight:600; color:var(--white); font-size:0.95rem; list-style:none; display:flex; justify-content:space-between; align-items:center; gap:12px;">
+          Can I use it on my phone?
+          <span style="color:var(--violet); font-size:1.2rem; flex-shrink:0;">+</span>
+        </summary>
+        <p style="margin-top:14px; font-size:0.875rem; color:var(--white-60); line-height:1.7;">
+          Yes. Student Success AI is fully responsive and works beautifully on mobile. A native app for iOS and Android is coming in Q3.
+        </p>
+      </details>
+
+    </div>
+  </section>
+
+  <!-- ═══════ CTA ═══════ -->
+  <div class="cta-section">
+    <div class="cta-inner">
+      <span class="section-tag" style="justify-content:center; display:inline-flex;">✦ Start Free Today</span>
+      <h2 class="cta-headline">
+        Your next semester starts<br/><span class="grad-text">right now.</span>
+      </h2>
+      <p class="cta-sub">
+        Join 10,000+ students who replaced academic panic with an intelligent plan. No credit card required.
+      </p>
+      <div class="cta-btns">
+       <a href="{{ url_for('dashboard') }}" class="btn-primary" style="font-size:1rem; padding:16px 36px;">
+    Start Planning Free →
+</a>
+      <a href="{{ url_for('add_task') }}" class="btn-secondary" style="font-size:0.95rem;">
+    Add Your First Task
+</a>
+      </div>
+      <p style="margin-top:20px; font-size:0.78rem; color:var(--white-30);">
+        Free forever for students · No credit card · Cancel anytime
+      </p>
+    </div>
+  </div>
+
+  <!-- ═══════ FOOTER ═══════ -->
+  <footer aria-label="Site footer">
+    <div class="footer-inner">
+      <div class="footer-top">
+        <div>
+          <a href="#" class="footer-brand-name" aria-label="Student Success AI home">Student Success AI</a>
+          <p class="footer-brand-desc">
+            From Panic to Plan. AI-powered productivity for ambitious students who refuse to let academics hold back their future.
+          </p>
+          <div class="footer-socials" aria-label="Social media links">
+            <a href="#" class="social-link" aria-label="Twitter/X">𝕏</a>
+            <a href="#" class="social-link" aria-label="LinkedIn">in</a>
+            <a href="#" class="social-link" aria-label="Instagram">ig</a>
+            <a href="#" class="social-link" aria-label="Discord">d</a>
+          </div>
+        </div>
+
+        <div>
+          <div class="footer-col-title">Product</div>
+          <ul class="footer-links">
+            <li><a href="#features">Features</a></li>
+            <li><a href="#how">How It Works</a></li>
+            <li><a href="#">Pricing</a></li>
+            <li><a href="#">Changelog</a></li>
+            <li><a href="#">Roadmap</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <div class="footer-col-title">Company</div>
+          <ul class="footer-links">
+            <li><a href="#">About</a></li>
+            <li><a href="#">Blog</a></li>
+            <li><a href="#">Careers</a></li>
+            <li><a href="#">Press</a></li>
+            <li><a href="#">Contact</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <div class="footer-col-title">Legal</div>
+          <ul class="footer-links">
+            <li><a href="#">Privacy Policy</a></li>
+            <li><a href="#">Terms of Service</a></li>
+            <li><a href="#">Cookie Policy</a></li>
+            <li><a href="#">Security</a></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <p class="footer-copy">© 2025 Student Success AI. All rights reserved.</p>
+        <div class="footer-legal" aria-label="Legal links">
+          <a href="#">Privacy</a>
+          <a href="#">Terms</a>
+          <a href="#">Security</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+</div><!-- /wrapper -->
+
+<script src="static/script.js" defer></script>
+</body>
+</html>
