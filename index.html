@@ -1,0 +1,643 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Student Success AI — Turn Academic Chaos Into Career Success</title>
+<meta name="description" content="The AI-powered academic workspace for college students. Task management, weekly planning, analytics, and a Gemini-powered AI assistant in one dashboard." />
+<link rel="stylesheet" href="static/style.css" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+</head>
+<body>
+
+<div class="atmosphere" aria-hidden="true">
+  <div class="aura aura-1"></div>
+  <div class="aura aura-2"></div>
+  <div class="aura aura-3"></div>
+  <div class="grid-veil"></div>
+</div>
+
+<div class="shell">
+
+  <!-- ═══════════════ NAV ═══════════════ -->
+  <nav id="mainNav">
+    <a href="#" class="brand">
+      <div class="brand-mark" aria-hidden="true">S</div>
+      <span class="brand-name">Student Success AI</span>
+    </a>
+
+    <ul class="nav-links">
+      <li><a href="#features">Features</a></li>
+      <li><a href="#dashboard">Dashboard</a></li>
+      <li><a href="#ai-assistant">AI Assistant</a></li>
+      <li><a href="#planner">Planner</a></li>
+      <li><a href="#analytics">Analytics</a></li>
+      <li><a href="#faq">FAQ</a></li>
+    </ul>
+
+    <div class="nav-cta">
+      <button class="btn-text">Log in</button>
+      <a href="#final-cta" class="btn-solid">Get Started</a>
+    </div>
+
+    <button class="nav-toggle" id="navToggle" aria-label="Toggle menu">
+      <span></span><span></span><span></span>
+    </button>
+  </nav>
+
+  <div class="mobile-nav" id="mobileNav">
+    <a href="#features">Features</a>
+    <a href="#dashboard">Dashboard</a>
+    <a href="#ai-assistant">AI Assistant</a>
+    <a href="#planner">Planner</a>
+    <a href="#analytics">Analytics</a>
+    <a href="#faq">FAQ</a>
+    <a href="#final-cta">Get Started</a>
+  </div>
+
+  <!-- ═══════════════ HERO ═══════════════ -->
+  <header class="hero">
+    <div class="hero-eyebrow">
+      <span class="eyebrow-dot" aria-hidden="true"></span>
+      Built with Flask, SQLAlchemy &amp; Google Gemini AI
+    </div>
+
+    <h1 class="hero-title">
+      Turn Academic Chaos Into <span class="accent">Career Success.</span>
+    </h1>
+
+    <p class="hero-desc">
+      Student Success AI is one workspace where college students manage tasks, plan their week,
+      track risk, and get real answers from an AI assistant — <strong>not five separate apps stitched together.</strong>
+    </p>
+
+    <div class="hero-actions">
+      <a href="#final-cta" class="btn-primary">
+        Create Your Workspace →
+      </a>
+      <a href="#dashboard" class="btn-outline">
+        See the Dashboard
+      </a>
+    </div>
+
+    <p class="hero-meta">
+      Free for students ·
+      <span class="stack-pill">Flask</span><span class="stack-pill">SQLite</span><span class="stack-pill">Gemini AI</span>
+    </p>
+
+    <!-- Signature: live module rail -->
+    <div class="module-rail-wrap">
+      <div class="module-rail-fade fade-l" aria-hidden="true"></div>
+      <div class="module-rail-fade fade-r" aria-hidden="true"></div>
+
+      <div class="module-rail" id="moduleRail" role="list" aria-label="Dashboard modules preview">
+
+        <!-- Task Manager -->
+        <div class="module-card" role="listitem">
+          <div class="module-card-head">
+            <div class="module-icon mi-violet" aria-hidden="true">✓</div>
+            <span class="module-name">Task Manager</span>
+            <span class="module-live"><span class="live-dot"></span>Live</span>
+          </div>
+          <div class="mod-task-row done">
+            <div class="mod-check on" aria-hidden="true"></div>
+            <span class="mod-task-name">Submit OS Lab Record</span>
+          </div>
+          <div class="mod-task-row">
+            <div class="mod-check" aria-hidden="true"></div>
+            <span class="mod-task-name">CN Assignment — Unit 4</span>
+            <span class="mod-prio mp-high">HIGH</span>
+          </div>
+          <div class="mod-task-row">
+            <div class="mod-check" aria-hidden="true"></div>
+            <span class="mod-task-name">DBMS mini project draft</span>
+            <span class="mod-prio mp-med">MED</span>
+          </div>
+        </div>
+
+        <!-- Weekly Planner -->
+        <div class="module-card" role="listitem">
+          <div class="module-card-head">
+            <div class="module-icon mi-cyan" aria-hidden="true">📅</div>
+            <span class="module-name">Weekly Planner</span>
+            <span class="module-live"><span class="live-dot"></span>Live</span>
+          </div>
+          <div class="mod-week" aria-hidden="true">
+            <div class="mod-day"><div class="mod-day-label">M</div><div class="mod-day-bar"></div></div>
+            <div class="mod-day"><div class="mod-day-label">T</div><div class="mod-day-bar"></div></div>
+            <div class="mod-day"><div class="mod-day-label">W</div><div class="mod-day-bar"></div></div>
+            <div class="mod-day"><div class="mod-day-label">T</div><div class="mod-day-bar"></div></div>
+            <div class="mod-day"><div class="mod-day-label">F</div><div class="mod-day-bar"></div></div>
+            <div class="mod-day"><div class="mod-day-label">S</div><div class="mod-day-bar"></div></div>
+            <div class="mod-day"><div class="mod-day-label">S</div><div class="mod-day-bar"></div></div>
+          </div>
+          <div class="mod-today-line">Today: <strong>2.5 hrs</strong> CN + DBMS scheduled</div>
+        </div>
+
+        <!-- AI Assistant -->
+        <div class="module-card" role="listitem">
+          <div class="module-card-head">
+            <div class="module-icon mi-violet" aria-hidden="true">✦</div>
+            <span class="module-name">AI Assistant</span>
+            <span class="module-live"><span class="live-dot"></span>Live</span>
+          </div>
+          <div class="mod-chat-bubble">5 assignments, 2 exams this week. Help me plan.</div>
+          <div class="mod-chat-bubble ai">Start with CN today — highest deadline urgency. I've blocked 6–8 PM in your planner.</div>
+        </div>
+
+        <!-- Analytics -->
+        <div class="module-card" role="listitem">
+          <div class="module-card-head">
+            <div class="module-icon mi-cyan" aria-hidden="true">📊</div>
+            <span class="module-name">Analytics</span>
+            <span class="module-live"><span class="live-dot"></span>Live</span>
+          </div>
+          <div class="mod-bars" aria-hidden="true">
+            <div class="mod-bar" style="height:40%"></div>
+            <div class="mod-bar" style="height:65%"></div>
+            <div class="mod-bar" style="height:30%"></div>
+            <div class="mod-bar" style="height:80%"></div>
+            <div class="mod-bar" style="height:55%"></div>
+          </div>
+          <div class="mod-risk-line">
+            Academic Risk Score <span class="mod-risk-val">62%</span>
+          </div>
+        </div>
+
+        <!-- Notifications -->
+        <div class="module-card" role="listitem">
+          <div class="module-card-head">
+            <div class="module-icon mi-pink" aria-hidden="true">🔔</div>
+            <span class="module-name">Smart Notifications</span>
+            <span class="module-live"><span class="live-dot"></span>Live</span>
+          </div>
+          <div class="dm-mini-row"><span class="dot" style="background:var(--pink)" aria-hidden="true"></span>CN Assignment due tomorrow</div>
+          <div class="dm-mini-row"><span class="dot" style="background:var(--amber)" aria-hidden="true"></span>DBMS exam in 4 days</div>
+          <div class="dm-mini-row"><span class="dot" style="background:var(--green)" aria-hidden="true"></span>AI suggests a study block at 6 PM</div>
+        </div>
+
+        <!-- Recent Activity -->
+        <div class="module-card" role="listitem">
+          <div class="module-card-head">
+            <div class="module-icon mi-green" aria-hidden="true">⏱</div>
+            <span class="module-name">Recent Activity</span>
+            <span class="module-live"><span class="live-dot"></span>Live</span>
+          </div>
+          <div class="dm-mini-row"><span class="dot" style="background:var(--green)" aria-hidden="true"></span>Completed "OS Lab Record"</div>
+          <div class="dm-mini-row"><span class="dot" style="background:var(--cyan)" aria-hidden="true"></span>Logged 1.5 study hours</div>
+          <div class="dm-mini-row"><span class="dot" style="background:var(--violet)" aria-hidden="true"></span>Added "Research Paper" task</div>
+        </div>
+
+      </div>
+    </div>
+  </header>
+
+  <!-- ═══════════════ FEATURES ═══════════════ -->
+  <section id="features">
+    <div class="section-inner">
+      <div class="section-kicker">Inside your workspace</div>
+      <h2 class="section-title">Every academic tool, built into one dashboard.</h2>
+      <p class="section-desc">
+        Not eight separate apps. One Flask-powered workspace where your tasks, your week, and your AI assistant all read from the same data.
+      </p>
+
+      <div class="feat-grid">
+
+        <div class="feat-card reveal span-2">
+          <div class="feat-icon-box mi-violet" aria-hidden="true">✓</div>
+          <div class="feat-title">Task Manager</div>
+          <p class="feat-text">Add, edit, delete, and mark tasks complete. Set priority, track deadlines, filter by status, and search across every assignment you've logged — all in one list that never gets lost in a group chat.</p>
+        </div>
+
+        <div class="feat-card reveal">
+          <div class="feat-icon-box mi-cyan" aria-hidden="true">📅</div>
+          <div class="feat-title">Weekly Study Planner</div>
+          <p class="feat-text">A real Monday-to-Sunday schedule that adapts to your deadlines, not a static template you abandon by Wednesday.</p>
+        </div>
+
+        <div class="feat-card reveal">
+          <div class="feat-icon-box mi-violet" aria-hidden="true">✦</div>
+          <div class="feat-title">AI Assistant</div>
+          <p class="feat-text">Powered by Google Gemini. Ask it to generate a study plan, explain a coding problem, or just talk through what's overwhelming you.</p>
+        </div>
+
+        <div class="feat-card reveal">
+          <div class="feat-icon-box mi-cyan" aria-hidden="true">📊</div>
+          <div class="feat-title">Analytics Dashboard</div>
+          <p class="feat-text">Productivity score, completion rate, study hours, and priority breakdown — the numbers that actually tell you how the week went.</p>
+        </div>
+
+        <div class="feat-card reveal">
+          <div class="feat-icon-box mi-pink" aria-hidden="true">🔔</div>
+          <div class="feat-title">Smart Notifications</div>
+          <p class="feat-text">Deadline alerts, study reminders, and AI suggestions that show up before the panic does, not after.</p>
+        </div>
+
+        <div class="feat-card reveal span-2">
+          <div class="feat-icon-box mi-green" aria-hidden="true">⏱</div>
+          <div class="feat-title">Recent Activity Log</div>
+          <p class="feat-text">A running record of what you completed, added, and deleted, plus your study progress over time — so you can actually see the work you put in, even on the weeks that felt like a blur.</p>
+        </div>
+
+        <div class="feat-card reveal">
+          <div class="feat-icon-box mi-pink" aria-hidden="true">🎯</div>
+          <div class="feat-title">Internship Tracker</div>
+          <p class="feat-text">Track applications, interview rounds, offer letters, and resume progress in one place.</p>
+          <span class="feat-soon-badge">COMING SOON</span>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════ DASHBOARD SHOWCASE ═══════════════ -->
+  <section class="showcase-section" id="dashboard">
+    <div class="section-inner">
+      <div class="section-kicker">After you log in</div>
+      <h2 class="section-title">This is what opens every time you sign in.</h2>
+      <p class="section-desc">
+        Stats, tasks, your AI assistant, and your risk score — visible the moment the dashboard loads. No digging through menus to find what's due.
+      </p>
+
+      <div class="showcase-frame reveal">
+        <div class="showcase-topbar" aria-hidden="true">
+          <span class="tb-dot"></span><span class="tb-dot"></span><span class="tb-dot"></span>
+          <span class="tb-url">app.studentsuccessai.com/dashboard</span>
+        </div>
+
+        <div class="dash-mock">
+          <div class="dm-sidebar" aria-hidden="true">
+            <div class="dm-side-item active">🏠 Dashboard</div>
+            <div class="dm-side-item">✓ Task Manager</div>
+            <div class="dm-side-item">📅 Planner</div>
+            <div class="dm-side-item">✦ AI Assistant</div>
+            <div class="dm-side-item">📊 Analytics</div>
+            <div class="dm-side-item">🎯 Internship</div>
+          </div>
+
+          <div class="dm-main">
+            <div class="dm-stats-row">
+              <div class="dm-stat"><div class="dm-stat-val">18</div><div class="dm-stat-lbl">Total Tasks</div></div>
+              <div class="dm-stat"><div class="dm-stat-val">6</div><div class="dm-stat-lbl">Pending</div></div>
+              <div class="dm-stat"><div class="dm-stat-val">12</div><div class="dm-stat-lbl">Completed</div></div>
+              <div class="dm-stat"><div class="dm-stat-val" style="color:var(--amber)">62%</div><div class="dm-stat-lbl">Risk Score</div></div>
+            </div>
+
+            <div class="dm-body-grid">
+              <div class="dm-panel">
+                <div class="dm-panel-title">Today's Tasks</div>
+                <div class="dm-mini-row"><span class="dot" style="background:var(--pink)" aria-hidden="true"></span>CN Assignment — due tomorrow</div>
+                <div class="dm-mini-row"><span class="dot" style="background:var(--amber)" aria-hidden="true"></span>DBMS Mini Project — in progress</div>
+                <div class="dm-mini-row"><span class="dot" style="background:var(--green)" aria-hidden="true"></span>AI Lab Record — completed</div>
+                <div class="dm-mini-row"><span class="dot" style="background:var(--violet)" aria-hidden="true"></span>Research Paper — not started</div>
+              </div>
+              <div class="dm-panel">
+                <div class="dm-panel-title">Upcoming Deadlines</div>
+                <div class="dm-mini-row"><span class="dot" style="background:var(--pink)" aria-hidden="true"></span>CN Assignment — Tomorrow</div>
+                <div class="dm-mini-row"><span class="dot" style="background:var(--cyan)" aria-hidden="true"></span>DBMS Exam — 4 days</div>
+                <div class="dm-mini-row"><span class="dot" style="background:var(--green)" aria-hidden="true"></span>Project Review — 6 days</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════ HOW IT WORKS ═══════════════ -->
+  <section>
+    <div class="section-inner">
+      <div class="section-kicker">Getting started</div>
+      <h2 class="section-title">From signup to your first AI study plan.</h2>
+      <p class="section-desc">A real sequence — each step depends on the one before it.</p>
+
+      <div class="flow-strip">
+        <div class="flow-step reveal">
+          <div class="flow-num">01</div>
+          <div class="flow-title">Create account</div>
+          <p class="flow-text">Sign up with your email. Your data lives in your own SQLite-backed profile from the first click.</p>
+        </div>
+        <div class="flow-step reveal">
+          <div class="flow-num">02</div>
+          <div class="flow-title">Add your tasks</div>
+          <p class="flow-text">Log assignments, exams, and projects with deadlines and priority. Takes under a minute per task.</p>
+        </div>
+        <div class="flow-step reveal">
+          <div class="flow-num">03</div>
+          <div class="flow-title">AI organizes everything</div>
+          <p class="flow-text">Gemini AI reads your workload and builds a weekly plan, flags risk, and tells you what to do first.</p>
+        </div>
+        <div class="flow-step reveal">
+          <div class="flow-num">04</div>
+          <div class="flow-title">Track your progress</div>
+          <p class="flow-text">Analytics update as you complete tasks — productivity score, study hours, and risk all move with you.</p>
+        </div>
+        <div class="flow-step reveal">
+          <div class="flow-num">05</div>
+          <div class="flow-title">Stay ahead, semester after semester</div>
+          <p class="flow-text">The system keeps learning your patterns, so each week's plan gets sharper than the last.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════ ANALYTICS SHOWCASE ═══════════════ -->
+  <section id="analytics">
+    <div class="section-inner">
+      <div class="section-kicker">Analytics dashboard</div>
+      <h2 class="section-title">Numbers that actually explain your week.</h2>
+      <p class="section-desc">Productivity score, completed tasks, study hours, and risk trend — pulled straight from what you logged, not a guess.</p>
+
+      <div class="analytics-grid">
+        <div class="chart-card reveal">
+          <div class="chart-card-title">Study Hours — Last 7 Days</div>
+          <div class="chart-card-sub">Logged automatically as you complete planner blocks</div>
+          <div class="big-bars">
+            <div class="big-bar-col"><div class="big-bar" data-h="35%" style="height:0"></div><span class="big-bar-day">Mon</span></div>
+            <div class="big-bar-col"><div class="big-bar" data-h="55%" style="height:0"></div><span class="big-bar-day">Tue</span></div>
+            <div class="big-bar-col"><div class="big-bar" data-h="20%" style="height:0"></div><span class="big-bar-day">Wed</span></div>
+            <div class="big-bar-col"><div class="big-bar" data-h="80%" style="height:0"></div><span class="big-bar-day">Thu</span></div>
+            <div class="big-bar-col"><div class="big-bar" data-h="65%" style="height:0"></div><span class="big-bar-day">Fri</span></div>
+            <div class="big-bar-col"><div class="big-bar" data-h="40%" style="height:0"></div><span class="big-bar-day">Sat</span></div>
+            <div class="big-bar-col"><div class="big-bar" data-h="25%" style="height:0"></div><span class="big-bar-day">Sun</span></div>
+          </div>
+        </div>
+
+        <div class="stack-mini">
+          <div class="chart-card reveal" style="padding:18px 20px;">
+            <div class="mini-stat-card">
+              <div class="mini-ring-wrap">
+                <svg class="mini-ring" viewBox="0 0 46 46" aria-hidden="true">
+                  <circle class="mr-track" cx="23" cy="23" r="18"/>
+                  <circle class="mr-fill" cx="23" cy="23" r="18" stroke="#2ECC71" stroke-dashoffset="113" data-offset="23"/>
+                </svg>
+              </div>
+              <div>
+                <div class="mini-stat-label">Productivity Score</div>
+                <div class="mini-stat-val">79 / 100</div>
+              </div>
+            </div>
+          </div>
+          <div class="chart-card reveal" style="padding:18px 20px;">
+            <div class="mini-stat-card">
+              <div class="mini-ring-wrap">
+                <svg class="mini-ring" viewBox="0 0 46 46" aria-hidden="true">
+                  <circle class="mr-track" cx="23" cy="23" r="18"/>
+                  <circle class="mr-fill" cx="23" cy="23" r="18" stroke="#00D4FF" stroke-dashoffset="113" data-offset="34"/>
+                </svg>
+              </div>
+              <div>
+                <div class="mini-stat-label">Task Completion Rate</div>
+                <div class="mini-stat-val">67%</div>
+              </div>
+            </div>
+          </div>
+          <div class="chart-card reveal" style="padding:18px 20px;">
+            <div class="mini-stat-card">
+              <div class="mini-ring-wrap">
+                <svg class="mini-ring" viewBox="0 0 46 46" aria-hidden="true">
+                  <circle class="mr-track" cx="23" cy="23" r="18"/>
+                  <circle class="mr-fill" cx="23" cy="23" r="18" stroke="#FFB84D" stroke-dashoffset="113" data-offset="60"/>
+                </svg>
+              </div>
+              <div>
+                <div class="mini-stat-label">Academic Risk Score</div>
+                <div class="mini-stat-val">62%</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════ AI ASSISTANT ═══════════════ -->
+  <section id="ai-assistant" style="background:var(--surface); border-top:1px solid var(--line-soft); border-bottom:1px solid var(--line-soft);">
+    <div class="section-inner">
+      <div class="ai-section-grid">
+        <div>
+          <div class="section-kicker">Powered by Google Gemini</div>
+          <h2 class="section-title" style="max-width:480px;">An AI assistant that actually knows your workload.</h2>
+          <p class="section-desc" style="margin-bottom:0;">
+            It's not a generic chatbot bolted onto a sidebar. It reads your tasks, deadlines, and study history before it answers.
+          </p>
+
+          <div class="ai-capability-list">
+            <div class="ai-cap-item reveal">
+              <div class="ai-cap-icon" aria-hidden="true">📋</div>
+              <p class="ai-cap-text"><strong>Generate study plans</strong> based on your real deadlines, not a generic template.</p>
+            </div>
+            <div class="ai-cap-item reveal">
+              <div class="ai-cap-icon" aria-hidden="true">💻</div>
+              <p class="ai-cap-text"><strong>Explain coding problems</strong> step by step, in plain language.</p>
+            </div>
+            <div class="ai-cap-item reveal">
+              <div class="ai-cap-icon" aria-hidden="true">📝</div>
+              <p class="ai-cap-text"><strong>Help with assignments</strong> — outline structure, check your reasoning, suggest sources.</p>
+            </div>
+            <div class="ai-cap-item reveal">
+              <div class="ai-cap-icon" aria-hidden="true">🎓</div>
+              <p class="ai-cap-text"><strong>Answer academic questions</strong> across subjects, on demand, at 2 AM if that's when you're studying.</p>
+            </div>
+            <div class="ai-cap-item reveal">
+              <div class="ai-cap-icon" aria-hidden="true">⏳</div>
+              <p class="ai-cap-text"><strong>Time management advice</strong> tuned to how you actually study, not a productivity blog's idea of it.</p>
+            </div>
+            <div class="ai-cap-item reveal">
+              <div class="ai-cap-icon" aria-hidden="true">🧭</div>
+              <p class="ai-cap-text"><strong>Career guidance</strong> connecting today's coursework to where you want to land.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="chat-mock reveal">
+          <div class="chat-mock-head">
+            <div class="chat-mock-avatar" aria-hidden="true">✦</div>
+            <div>
+              <div class="chat-mock-name">AI Academic Assistant</div>
+              <div class="chat-mock-sub">● Powered by Gemini</div>
+            </div>
+          </div>
+          <div class="chat-thread" id="chatThread"></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════ PLANNER (referenced anchor target) ═══════════════ -->
+  <span id="planner" style="position:relative; top:-80px; display:block;" aria-hidden="true"></span>
+
+  <!-- ═══════════════ INTERNSHIP TRACKER — COMING SOON ═══════════════ -->
+  <section class="soon-section">
+    <div class="soon-card reveal">
+      <span class="soon-badge">⏳ COMING SOON</span>
+      <h2 class="soon-title">Internship Tracker</h2>
+      <p class="soon-text">
+        Track applications, interview progress, offer letters, and resume readiness — built into the same dashboard as your academic workload, so placement prep stops competing with your coursework.
+      </p>
+      <div class="soon-pills">
+        <span class="soon-pill">Application Tracking</span>
+        <span class="soon-pill">Interview Progress</span>
+        <span class="soon-pill">Offer Letters</span>
+        <span class="soon-pill">Resume Progress</span>
+        <span class="soon-pill">Placement Prep</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════ TESTIMONIALS ═══════════════ -->
+  <section>
+    <div class="section-inner">
+      <div class="section-kicker">From students using it</div>
+      <h2 class="section-title">What changes once everything is in one place.</h2>
+      <p class="section-desc">Real outcomes, not just "I love this app" quotes.</p>
+
+      <div class="testi-grid">
+        <div class="testi-card reveal">
+          <span class="testi-result-tag tr-green">−4 hrs of weekly stress</span>
+          <p class="testi-quote">
+            I used to keep deadlines in four different places — WhatsApp, a notebook, my phone's calendar, and my memory. The Task Manager replaced all of them. I stopped missing submission windows entirely.
+          </p>
+          <div class="testi-person">
+            <div class="testi-avatar" style="background:linear-gradient(135deg,var(--violet),#8B7CF6)" aria-hidden="true">R</div>
+            <div>
+              <div class="testi-pname">Rohan Deshmukh</div>
+              <div class="testi-prole">Third Year, Computer Engineering</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="testi-card reveal" style="transition-delay:0.1s">
+          <span class="testi-result-tag tr-violet">CGPA 7.1 → 8.3</span>
+          <p class="testi-quote">
+            The Academic Risk Score caught that I was falling behind in DBMS two weeks before I would've noticed myself. The AI Assistant rebuilt my plan around it and I actually passed comfortably instead of cramming.
+          </p>
+          <div class="testi-person">
+            <div class="testi-avatar" style="background:linear-gradient(135deg,var(--cyan),var(--violet))" aria-hidden="true">A</div>
+            <div>
+              <div class="testi-pname">Ananya Joshi</div>
+              <div class="testi-prole">Second Year, Information Technology</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="testi-card reveal" style="transition-delay:0.2s">
+          <span class="testi-result-tag tr-cyan">Placement-ready in 6 weeks</span>
+          <p class="testi-quote">
+            I asked the AI Assistant career-guidance questions I was too awkward to ask my mentors. It pointed me toward exactly the skill gaps I needed to close before my first interview. The Internship Tracker can't come soon enough.
+          </p>
+          <div class="testi-person">
+            <div class="testi-avatar" style="background:linear-gradient(135deg,var(--green),var(--cyan))" aria-hidden="true">K</div>
+            <div>
+              <div class="testi-pname">Karan Patil</div>
+              <div class="testi-prole">Final Year, MCA</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════ FAQ ═══════════════ -->
+  <section id="faq">
+    <div class="section-inner">
+      <div class="section-kicker">Questions</div>
+      <h2 class="section-title">Frequently asked questions.</h2>
+      <p class="section-desc">About the planner, tasks, analytics, AI assistant, notifications, and what's still coming.</p>
+
+      <div class="faq-list">
+        <details class="faq-item">
+          <summary class="faq-q">How does the Weekly Planner decide what goes where?<span class="faq-plus">+</span></summary>
+          <p class="faq-a">It looks at your task deadlines, priority levels, and how much time each one typically takes, then arranges study blocks across Monday to Sunday. You can drag and edit any block manually — the AI suggestion is a starting point, not a lock.</p>
+        </details>
+        <details class="faq-item">
+          <summary class="faq-q">Can I edit or delete tasks after adding them?<span class="faq-plus">+</span></summary>
+          <p class="faq-a">Yes. Every task in the Task Manager can be edited, marked complete, reprioritized, or deleted at any point. You can also filter by status and search across your full task history.</p>
+        </details>
+        <details class="faq-item">
+          <summary class="faq-q">Where do the Analytics numbers come from?<span class="faq-plus">+</span></summary>
+          <p class="faq-a">Directly from your own activity — completed and pending tasks, logged study hours, and priority distribution stored in SQLite via SQLAlchemy. Nothing is simulated; the dashboard reflects what you've actually done.</p>
+        </details>
+        <details class="faq-item">
+          <summary class="faq-q">What can the AI Assistant actually help with?<span class="faq-plus">+</span></summary>
+          <p class="faq-a">Study plan generation, explaining coding problems, assignment help, academic Q&amp;A, time management advice, and career guidance. It's powered by Google Gemini and has context on your current tasks and deadlines.</p>
+        </details>
+        <details class="faq-item">
+          <summary class="faq-q">What kinds of notifications will I get?<span class="faq-plus">+</span></summary>
+          <p class="faq-a">Deadline alerts, task reminders, AI suggestions, study reminders, and upcoming exam notices. They surface inside the dashboard — no separate app to install or check.</p>
+        </details>
+        <details class="faq-item">
+          <summary class="faq-q">When is the Internship Tracker launching?<span class="faq-plus">+</span></summary>
+          <p class="faq-a">It's in active development. The plan covers application tracking, interview progress, offer letters, and resume readiness — built on the same data model as your academic dashboard. No date is locked yet, but it's the next major module.</p>
+        </details>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════ FINAL CTA ═══════════════ -->
+  <section id="final-cta">
+    <div class="final-cta reveal">
+      <h2 class="final-cta-title">Create Your AI-Powered<br/>Student Workspace Today.</h2>
+      <p class="final-cta-text">Free to start. Your tasks, planner, and AI assistant — set up in under five minutes.</p>
+      <div class="final-cta-actions">
+        <a href="#" class="btn-primary" style="font-size:1rem; padding:16px 32px;">Get Started Free →</a>
+        <a href="#dashboard" class="btn-outline">View Dashboard Demo</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════ FOOTER ═══════════════ -->
+  <footer>
+    <div class="footer-grid">
+      <div>
+        <div class="brand">
+          <div class="brand-mark" aria-hidden="true">S</div>
+          <span class="brand-name">Student Success AI</span>
+        </div>
+        <p class="footer-brand-desc">
+          The AI-powered academic workspace for college students — task management, planning, analytics, and a Gemini-powered assistant, all in one dashboard.
+        </p>
+      </div>
+
+      <div>
+        <div class="footer-col-title">Product</div>
+        <ul class="footer-links">
+          <li><a href="#features">Features</a></li>
+          <li><a href="#dashboard">Dashboard</a></li>
+          <li><a href="#ai-assistant">AI Assistant</a></li>
+          <li><a href="#analytics">Analytics</a></li>
+        </ul>
+      </div>
+
+      <div>
+        <div class="footer-col-title">Modules</div>
+        <ul class="footer-links">
+          <li><a href="#features">Task Manager</a></li>
+          <li><a href="#planner">Weekly Planner</a></li>
+          <li><a href="#features">Internship Tracker</a></li>
+          <li><a href="#faq">FAQ</a></li>
+        </ul>
+      </div>
+
+      <div>
+        <div class="footer-col-title">Company</div>
+        <ul class="footer-links">
+          <li><a href="#">About</a></li>
+          <li><a href="#">Contact</a></li>
+          <li><a href="#">Privacy Policy</a></li>
+          <li><a href="#">Terms</a></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <p class="footer-copy">© 2025 Student Success AI. Built for students, by students.</p>
+      <p class="footer-stack">Flask · SQLAlchemy · Gemini AI</p>
+    </div>
+  </footer>
+
+</div><!-- /shell -->
+
+<script src="static/script.js" defer></script>
+</body>
+</html>
